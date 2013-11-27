@@ -1,8 +1,10 @@
 package org.iwt2.nikky.model.actors;
 
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
 
-public class FighterActor extends Actor {
+public class FighterActor extends Image {
 
 	 int hp;
 
@@ -10,6 +12,12 @@ public class FighterActor extends Actor {
 		this.hp = hp;
 	}
 
+	public FighterActor(Texture text, int hp) {
+		super(text);
+		this.hp= hp;
+	}
+
+	
 	public int getHP() {
 		return this.hp;
 	}

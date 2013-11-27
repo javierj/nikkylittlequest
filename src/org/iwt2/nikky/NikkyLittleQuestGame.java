@@ -3,7 +3,9 @@ package org.iwt2.nikky;
 import org.iwt2.nikky.model.actors.EnemyActor;
 import org.iwt2.nikky.model.actors.NikkiActor;
 import org.iwt2.nikky.model.process.CombatProcess;
+import org.iwt2.nikky.model.stages.CombatStage;
 import org.iwt2.nikky.util.TimeAlert;
+import org.iwt2.nikky.view.TextureDict;
 
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
@@ -14,6 +16,10 @@ import com.badlogic.gdx.graphics.Texture.TextureFilter;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
+import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
+import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 
 public class NikkyLittleQuestGame implements ApplicationListener {
 	private OrthographicCamera camera;
@@ -22,6 +28,8 @@ public class NikkyLittleQuestGame implements ApplicationListener {
 	private Sprite sprite;
 	
 	CombatProcess process;
+	//CombatStage combatStage;
+	Stage combatStage;
 	
 	@Override
 	public void create() {
@@ -42,11 +50,37 @@ public class NikkyLittleQuestGame implements ApplicationListener {
 		sprite.setOrigin(sprite.getWidth()/2, sprite.getHeight()/2);
 		sprite.setPosition(-sprite.getWidth()/2, -sprite.getHeight()/2);
 		*/
+		
+		//---
+		TextureDict textures = new TextureDict();
+		textures.addTexture("nikky", "characters/nikky.png");
+		textures.addTexture("enemy01", "characters/enemy01.png");
+		textures.load();
+		
+		//---Actors
+		
 		NikkiActor nikky = new NikkiActor(NikkyConstants.NIKKYHP);
 		
-		EnemyActor enemy = new EnemyActor(20);
+		// Tampoco
+		nikky.setDrawable(new SpriteDrawable(new Sprite(textures.getTexture("nikky"))));
+		nikky.setPosition(10f, 10f);
+		
+		EnemyActor enemy = new EnemyActor(textures.getTexture("enemy01"), 20);
 		TimeAlert alert = new TimeAlert(0.5f );
 		enemy.setAttackTimeAlert(alert);
+		//enemy.setDrawable(new TextureRegionDrawable(new TextureRegion(textures.getTexture("enemy01"))));
+		enemy.setPosition(200f, 200f);
+		
+		Image demo = new Image(textures.getTexture("enemy01"));
+		demo.setPosition(30f, 30f);
+		
+		//-- Stage
+		
+		//combatStage = new CombatStage(nikky, new SpriteBatch());
+		combatStage = new Stage();
+		combatStage.addActor(nikky);
+		combatStage.addActor(enemy);
+		this.combatStage.addActor(demo);
 		
 		process = new CombatProcess(nikky, enemy);
 		
@@ -67,6 +101,8 @@ public class NikkyLittleQuestGame implements ApplicationListener {
 		batch.begin();
 		sprite.draw(batch);
 		batch.end();*/
+		this.combatStage.act(Gdx.graphics.getDeltaTime());
+		this.combatStage.draw();
 		process.act(Gdx.graphics.getDeltaTime());
 	}
 
