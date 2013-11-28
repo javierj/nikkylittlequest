@@ -21,16 +21,4 @@ public class NikkiActor extends FighterActor {
 		super.hitted(damage);
 	}
 	
-	/**
-	 * Testing purpouses, no real code
-	 */
-	@Override
-	public void draw(Batch batch, float parentAlpha) {
-		System.out.println("Nikky:Draw() Called");
-		super.draw(batch, parentAlpha);
-	/*	batch.draw(
-				((TextureRegionDrawable)this.getDrawable())
-					.getRegion(), 10f, 10f);
-	*/
-	}
 }

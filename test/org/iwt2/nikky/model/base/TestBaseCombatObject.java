@@ -23,6 +23,7 @@ public class TestBaseCombatObject {
 		CombatObject bco = new BaseCombatObject();
 		
 		assertFalse(bco.isColor(NikkyConstants.COLORBLUE));
+		assertFalse(bco.isColor(NikkyConstants.COLORYELLOW));
 	}
 
 	@Test
@@ -40,6 +41,15 @@ public class TestBaseCombatObject {
 		assertTrue(bco.isColor(NikkyConstants.COLORBLUE));
 	}
 
+	@Test
+	public void aBlueObject_isNot_aYellowObject() {
+		CombatObject bco = new BaseCombatObject();
+		
+		bco.setColor(NikkyConstants.COLORBLUE);
+		assertFalse(bco.isColor(NikkyConstants.COLORYELLOW));
+	}
+
+	
 	@Test
 	public void aNewCombatObjectMayBeFood() {
 		CombatObject bco = new BaseCombatObject();

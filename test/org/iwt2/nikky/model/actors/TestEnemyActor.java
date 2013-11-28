@@ -3,6 +3,11 @@ package org.iwt2.nikky.model.actors;
 import static org.junit.Assert.*;
 import static org.hamcrest.CoreMatchers.*;
 
+import org.iwt2.nikky.NikkyConstants;
+import org.iwt2.nikky.model.base.BaseCombatObject;
+import org.iwt2.nikky.model.base.WeaknessToBlue;
+import org.iwt2.nikky.model.base.CombatObject;
+import org.iwt2.nikky.model.base.WeaknessToFood;
 import org.iwt2.nikky.util.TimeAlert;
 import org.junit.Before;
 import org.junit.Test;
@@ -33,7 +38,59 @@ public class TestEnemyActor {
 		assertThat(alert.timeCalled, equalTo(1f));
 	}
 	
+	/**
+	 * Warning !!
+	 * This test must not know how to create blue objects.
+	 */
+	@Test
+	public void whenAEnemyActorHasWeaknessForBlueObjects_AndGetsABlueObject_LosesOneHP() {
+		
+		this.enemy.addWeakness(new WeaknessToBlue());
+		CombatObject blueObject = new BaseCombatObject();
+		blueObject.setColor(NikkyConstants.COLORBLUE);
+		
+		this.enemy.hittedBy(blueObject);
+		
+		assertThat(this.enemy.getHP(), is(this.hitPoints -1));
+	}
+
+	/**
+	 * Warning !!
+	 * This test must not know how to create blue objects.
+	 * 
+	 * This is nor a good test, it may fail by EnemyActor or Weakness or CombactObject
+	 */
+	@Test
+	public void whenAEnemyActorHasWeaknessForBlueObjects_AndGetsANotBlueObject_HPRemainsTheSame() {
+		
+		this.enemy.addWeakness(new WeaknessToBlue());
+		CombatObject yellowObject = new BaseCombatObject();
+		yellowObject.setColor(NikkyConstants.COLORYELLOW);
+		
+		this.enemy.hittedBy(yellowObject);
+		
+		assertThat(this.enemy.hp, is(this.hitPoints));
+	}
+
 	
+	@Test
+	public void whenAEnemyActorHasWeaknessForBlueObjectsAndFood_AndGetsBlueOrFoodObjects_LosesHP() {
+		
+		this.enemy.addWeakness(new WeaknessToBlue());
+		this.enemy.addWeakness(new WeaknessToFood());
+		CombatObject object = new BaseCombatObject();
+		object.setColor(NikkyConstants.COLORBLUE);
+		
+		this.enemy.hittedBy(object);
+		
+		object.setColor(NikkyConstants.COLORYELLOW);
+		object.setFood();
+
+		this.enemy.hittedBy(object);
+		
+		assertThat(this.enemy.hp, is(this.hitPoints -2));
+	}
+
 	// --- Spies --------------------------------------------------
 	
 	class SpyTimeAlert extends TimeAlert {

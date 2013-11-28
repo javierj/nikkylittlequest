@@ -1,5 +1,7 @@
 package org.iwt2.nikky.model.base;
 
+import org.iwt2.nikky.NikkyConstants;
+
 public class WeaknessToBlue implements Weakness {
 
 	/* (non-Javadoc)
@@ -7,7 +9,7 @@ public class WeaknessToBlue implements Weakness {
 	 */
 	@Override
 	public boolean isWeakTo(CombatObject co) {
-		return co.isColor("Blue");
+		return co.isColor(NikkyConstants.COLORBLUE);
 	}
 
 }

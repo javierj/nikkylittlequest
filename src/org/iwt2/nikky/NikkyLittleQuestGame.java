@@ -71,7 +71,9 @@ public class NikkyLittleQuestGame implements ApplicationListener {
 		//enemy.setDrawable(new TextureRegionDrawable(new TextureRegion(textures.getTexture("enemy01"))));
 		enemy.setPosition(200f, 200f);
 		
-		Image demo = new Image(textures.getTexture("enemy01"));
+		Texture textureObject = textures.getTexture("enemy01");
+		Image demo = new Image(textures.getTexture("nikky"));
+		demo.setDrawable(new TextureRegionDrawable(new TextureRegion(textureObject)));
 		demo.setPosition(30f, 30f);
 		
 		//-- Stage

@@ -12,6 +12,7 @@ public class BaseCombatObject implements CombatObject {
 	 * @return Always returns false
 	 */
 	public boolean isColor(String color) {
+		//System.out.println("My : " + this.color + " == " + color);
 		return this.color.equals(color);
 	}
 

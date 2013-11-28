@@ -46,8 +46,8 @@ public class TestWeakness {
 	public void whenReceivesAnCombatObjectWithOtherColor_WeaknessToBlueReturnFalse() {
 		weakness = new WeaknessToBlue();
 		
-		co.setColor("Yellow");
-		when(co.isColor(BLUE)).thenReturn(false);
+		co.setColor(NikkyConstants.COLORYELLOW);
+		when(co.isColor(anyString())).thenReturn(false);
 		
 		
 		assertFalse(weakness.isWeakTo(co));
