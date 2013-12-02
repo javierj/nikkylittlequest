@@ -8,11 +8,7 @@ import org.iwt2.nikky.model.actors.FighterActor;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.badlogic.gdx.files.FileHandle;
-import com.badlogic.gdx.graphics.Pixmap.Format;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.Sprite;
-import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
+
 
 /**
  * A fighter Actor is a LibGDX Actor that has hit points

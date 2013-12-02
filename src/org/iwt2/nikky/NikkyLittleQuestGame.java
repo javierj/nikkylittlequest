@@ -1,5 +1,7 @@
 package org.iwt2.nikky;
 
+import org.iwt2.nikky.model.actors.CombatObjectActor;
+import org.iwt2.nikky.model.actors.CombatObjectGroup;
 import org.iwt2.nikky.model.actors.EnemyActor;
 import org.iwt2.nikky.model.actors.NikkiActor;
 import org.iwt2.nikky.model.process.CombatProcess;
@@ -30,6 +32,7 @@ public class NikkyLittleQuestGame implements ApplicationListener {
 	CombatProcess process;
 	//CombatStage combatStage;
 	Stage combatStage;
+	private CombatObjectGroup coGroup;
 	
 	@Override
 	public void create() {
@@ -74,7 +77,9 @@ public class NikkyLittleQuestGame implements ApplicationListener {
 		Texture textureObject = textures.getTexture("enemy01");
 		Image demo = new Image(textures.getTexture("nikky"));
 		demo.setDrawable(new TextureRegionDrawable(new TextureRegion(textureObject)));
-		demo.setPosition(30f, 30f);
+		demo.setPosition(0f, 0f);
+		
+		Image demo2 = new Image(textures.getTexture("nikky"));
 		
 		//-- Stage
 		
@@ -86,6 +91,20 @@ public class NikkyLittleQuestGame implements ApplicationListener {
 		
 		process = new CombatProcess(nikky, enemy);
 		
+		// Group & objects
+		CombatObjectActor object1 =new CombatObjectActor(textureObject);
+		CombatObjectActor object2 =new CombatObjectActor(textureObject);
+		CombatObjectActor object3 =new CombatObjectActor(textureObject);
+		
+		coGroup= new CombatObjectGroup();
+		coGroup.addCombatObject(object1);
+		coGroup.addCombatObject(object2);
+		coGroup.addCombatObject(object3);
+		coGroup.setPosition(150f, 150f);
+		//System.out.println("Group: " + coGroup.getX() + ", " + coGroup.getY());
+		//System.out.println("Demo 30,30expected: " + demo.getX() + ", " + demo.getY());
+		
+		this.combatStage.addActor(coGroup);
 	}
 
 	@Override

@@ -2,9 +2,9 @@ package org.iwt2.nikky.model.actors;
 
 import static org.junit.Assert.*;
 import static org.hamcrest.CoreMatchers.*;
+import static org.mockito.Mockito.*;
 
 import org.iwt2.nikky.NikkyConstants;
-import org.iwt2.nikky.model.base.BaseCombatObject;
 import org.iwt2.nikky.model.base.WeaknessToBlue;
 import org.iwt2.nikky.model.base.CombatObject;
 import org.iwt2.nikky.model.base.WeaknessToFood;
@@ -46,8 +46,8 @@ public class TestEnemyActor {
 	public void whenAEnemyActorHasWeaknessForBlueObjects_AndGetsABlueObject_LosesOneHP() {
 		
 		this.enemy.addWeakness(new WeaknessToBlue());
-		CombatObject blueObject = new BaseCombatObject();
-		blueObject.setColor(NikkyConstants.COLORBLUE);
+		CombatObject blueObject = mock(CombatObject.class);
+		when(blueObject.isColor(NikkyConstants.COLORBLUE)).thenReturn(true);
 		
 		this.enemy.hittedBy(blueObject);
 		
@@ -64,8 +64,8 @@ public class TestEnemyActor {
 	public void whenAEnemyActorHasWeaknessForBlueObjects_AndGetsANotBlueObject_HPRemainsTheSame() {
 		
 		this.enemy.addWeakness(new WeaknessToBlue());
-		CombatObject yellowObject = new BaseCombatObject();
-		yellowObject.setColor(NikkyConstants.COLORYELLOW);
+		CombatObject yellowObject = mock(CombatObject.class);
+		when(yellowObject.isColor(NikkyConstants.COLORYELLOW)).thenReturn(true);
 		
 		this.enemy.hittedBy(yellowObject);
 		
@@ -78,13 +78,13 @@ public class TestEnemyActor {
 		
 		this.enemy.addWeakness(new WeaknessToBlue());
 		this.enemy.addWeakness(new WeaknessToFood());
-		CombatObject object = new BaseCombatObject();
-		object.setColor(NikkyConstants.COLORBLUE);
+		CombatObject object = mock(CombatObject.class);
+		when(object.isColor(NikkyConstants.COLORBLUE)).thenReturn(true);
 		
 		this.enemy.hittedBy(object);
 		
-		object.setColor(NikkyConstants.COLORYELLOW);
-		object.setFood();
+		when(object.isColor(NikkyConstants.COLORBLUE)).thenReturn(false);
+		when(object.isFood()).thenReturn(true);
 
 		this.enemy.hittedBy(object);
 		
