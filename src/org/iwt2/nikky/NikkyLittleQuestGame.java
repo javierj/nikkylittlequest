@@ -4,10 +4,12 @@ import org.iwt2.nikky.model.actors.CombatObjectActor;
 import org.iwt2.nikky.model.actors.CombatObjectGroup;
 import org.iwt2.nikky.model.actors.EnemyActor;
 import org.iwt2.nikky.model.actors.NikkiActor;
+import org.iwt2.nikky.model.actors.Table2D;
 import org.iwt2.nikky.model.process.CombatProcess;
 import org.iwt2.nikky.model.stages.CombatStage;
 import org.iwt2.nikky.util.TimeAlert;
 import org.iwt2.nikky.view.TextureDict;
+import org.iwt2.nikky.view.TextureLoader;
 
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
@@ -55,16 +57,18 @@ public class NikkyLittleQuestGame implements ApplicationListener {
 		*/
 		
 		//---
-		TextureDict textures = new TextureDict();
-		textures.addTexture("nikky", "characters/nikky.png");
+		TextureLoader loader = new TextureLoader();
+		TextureDict textures = loader.getTextureDictionary();
+		
+		/*textures.addTexture("nikky", "characters/nikky.png");
 		textures.addTexture("enemy01", "characters/enemy01.png");
 		textures.load();
-		
+		*/
 		//---Actors
 		
 		NikkiActor nikky = new NikkiActor(NikkyConstants.NIKKYHP);
 		
-		// Tampoco
+		// Tampoco funciona.Se arreglo en una nighlty building
 		nikky.setDrawable(new SpriteDrawable(new Sprite(textures.getTexture("nikky"))));
 		nikky.setPosition(10f, 10f);
 		
@@ -92,10 +96,11 @@ public class NikkyLittleQuestGame implements ApplicationListener {
 		process = new CombatProcess(nikky, enemy);
 		
 		// Group & objects
-		CombatObjectActor object1 =new CombatObjectActor(textureObject);
-		CombatObjectActor object2 =new CombatObjectActor(textureObject);
-		CombatObjectActor object3 =new CombatObjectActor(textureObject);
 		
+		CombatObjectActor object1 =new CombatObjectActor(textures.getTexture("apple"));
+		CombatObjectActor object2 =new CombatObjectActor(textures.getTexture("carrot"));
+		CombatObjectActor object3 =new CombatObjectActor(textureObject);
+		/* -- Deprecated
 		coGroup= new CombatObjectGroup();
 		coGroup.addCombatObject(object1);
 		coGroup.addCombatObject(object2);
@@ -105,6 +110,23 @@ public class NikkyLittleQuestGame implements ApplicationListener {
 		//System.out.println("Demo 30,30expected: " + demo.getX() + ", " + demo.getY());
 		
 		this.combatStage.addActor(coGroup);
+		*/
+		
+		// Tablet
+		Table2D table = new Table2D(3);
+		table.setSpacing(10f);
+		
+		table.add(object1);
+		table.add(object2);
+		table.add(object3);
+		table.add(object1);
+		table.add(object2);
+		
+		
+		
+		table.setPosition(340f, 340f);
+
+		this.combatStage.addActor(table);
 	}
 
 	@Override

@@ -7,7 +7,7 @@ import org.iwt2.nikky.NikkyConstants;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.badlogic.gdx.scenes.scene2d.Actor;
+
 
 /**
  * Codeunder test depends of the value of NikkyConstants.COMBATOBJECTWIDTH
