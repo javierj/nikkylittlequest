@@ -28,13 +28,13 @@ import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 public class NikkyLittleQuestGame implements ApplicationListener {
 	private OrthographicCamera camera;
 	private SpriteBatch batch;
-	private Texture texture;
-	private Sprite sprite;
+
 	
 	CombatProcess process;
 	//CombatStage combatStage;
 	Stage combatStage;
 	private CombatObjectGroup coGroup;
+	private CombatObjectActor object;
 	
 	@Override
 	public void create() {
@@ -92,14 +92,21 @@ public class NikkyLittleQuestGame implements ApplicationListener {
 		combatStage.addActor(nikky);
 		combatStage.addActor(enemy);
 		this.combatStage.addActor(demo);
+		Gdx.input.setInputProcessor(this.combatStage);
 		
-		process = new CombatProcess(nikky, enemy);
+		//process = new CombatProcess(nikky, enemy);
 		
 		// Group & objects
 		
 		CombatObjectActor object1 =new CombatObjectActor(textures.getTexture("apple"));
 		CombatObjectActor object2 =new CombatObjectActor(textures.getTexture("carrot"));
-		CombatObjectActor object3 =new CombatObjectActor(textureObject);
+		CombatObjectActor object3 =new CombatObjectActor(textures.getTexture("banana"));
+		CombatObjectActor object4 =new CombatObjectActor(textures.getTexture("salad"));
+		
+		object =new CombatObjectActor(textures.getTexture("apple"));
+		object.setPosition(10f, 100f);
+		this.combatStage.addActor(object);
+		
 		/* -- Deprecated
 		coGroup= new CombatObjectGroup();
 		coGroup.addCombatObject(object1);
@@ -113,18 +120,15 @@ public class NikkyLittleQuestGame implements ApplicationListener {
 		*/
 		
 		// Tablet
-		Table2D table = new Table2D(3);
+		Table2D table = new Table2D(2);
 		table.setSpacing(10f);
 		
 		table.add(object1);
 		table.add(object2);
 		table.add(object3);
-		table.add(object1);
-		table.add(object2);
+		table.add(object4);
 		
-		
-		
-		table.setPosition(340f, 340f);
+		table.setPosition(240f, 240f);
 
 		this.combatStage.addActor(table);
 	}
@@ -146,7 +150,7 @@ public class NikkyLittleQuestGame implements ApplicationListener {
 		batch.end();*/
 		this.combatStage.act(Gdx.graphics.getDeltaTime());
 		this.combatStage.draw();
-		process.act(Gdx.graphics.getDeltaTime());
+		//process.act(Gdx.graphics.getDeltaTime());
 	}
 
 	@Override

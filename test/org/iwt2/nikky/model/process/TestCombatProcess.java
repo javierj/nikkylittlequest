@@ -1,9 +1,11 @@
 package org.iwt2.nikky.model.process;
 import static org.junit.Assert.*;
 import static org.hamcrest.CoreMatchers.*;
-
+import static org.mockito.Mockito.*;
 import org.iwt2.nikky.model.actors.EnemyActor;
+import org.iwt2.nikky.model.actors.FighterActor;
 import org.iwt2.nikky.model.actors.NikkiActor;
+import org.iwt2.nikky.model.base.CombatObject;
 import org.iwt2.nikky.util.TimeAlert;
 import org.junit.Before;
 import org.junit.Test;
@@ -54,5 +56,34 @@ public class TestCombatProcess {
 		
 		assertThat(nikky.getHP(), is(0));
 	}
+	
+	
+	@Test
+	public void whenPlayerSelectsAnObject_ThatEnemyReceivesTheObject() {
+		FakeEnemy fakeenemy = new FakeEnemy();
+		process.setEnemy(fakeenemy);
+		
+		CombatObject co = mock(CombatObject.class);
+		
+		process.clickInObject(co);
+		
+		assertTrue(fakeenemy.called_hittedBy);
+	}
 
+	//------------------
+	
+	class FakeEnemy extends EnemyActor {
+		
+		boolean called_hittedBy;
+
+		public FakeEnemy() {
+			super(30);
+		}
+		
+		@Override
+		public void hittedBy(CombatObject co) {
+			this.called_hittedBy = true;
+		}
+	}
+	
 }

@@ -9,6 +9,8 @@ public class NikkyConstants {
 	public static final String COLORYELLOW = "Yellow";
 	
 	public static final int NIKKYHP = 20;
+	public static final String COLORORANGE = "Orange";
+	public static final String COLORRED = "Red";
 	
 	public static  float COMBATOBJECTWIDTH = 30f;
 	

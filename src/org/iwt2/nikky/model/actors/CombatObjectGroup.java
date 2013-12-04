@@ -6,6 +6,12 @@ import org.iwt2.nikky.util.TimeAlert;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Group;
 
+/**
+ * Deprecated. Now using Table2D.
+ * 
+ * @author Javier
+ *
+ */
 public class CombatObjectGroup extends Group {
 
 	public static  float SPACEBETWEENOBJECTS = 5f;

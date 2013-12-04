@@ -10,6 +10,8 @@ import org.junit.Test;
 
 
 /**
+ * Deprecated. Using Table2D instead of group
+ * 
  * Codeunder test depends of the value of NikkyConstants.COMBATOBJECTWIDTH
  * Ifthis value changes, then al tests will fail.
  * 

@@ -13,7 +13,9 @@ public class TextureLoader {
 	String[][] objects = {
 			{"apple", "objects/apple.png"},
 			{"carrot", "objects/carrot.png"},
-			{"cosmapolitan", "objects/cosmapolitan.jpg"}
+			{"cosmapolitan", "objects/cosmapolitan.jpg"},
+			{"banana", "objects/bananas.jpg"},
+			{"salad", "objects/salad.jpg"}
 	};
 
 	TextureDict dict;

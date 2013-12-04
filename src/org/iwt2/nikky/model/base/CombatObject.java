@@ -10,4 +10,6 @@ public interface CombatObject {
 
 	boolean isFood();
 
+	String getName();
+
 }

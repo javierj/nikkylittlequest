@@ -21,16 +21,28 @@ extends VerticalGroup
 	}
 
 
-	public void add(CombatObjectActor combatObjectActor) {
-		HorizontalGroup group = (HorizontalGroup)this.getChildren().get(0);
+	/**
+	 * Warning, you vanot addmore than the same object obce.
+	 * @param combatObjectActor
+	 */
+	public void add(CombatObjectActor combatObjectActor) {	
+		HorizontalGroup group = getLastGroup();
 		if (group.getChildren().size >= this.rowNumber) {
 			group = new HorizontalGroup();
-			this.addActor(group);
+			this.addActorAt(this.getChildren().size, group);
 		}
+		
 		group.addActor(combatObjectActor);
 		
 	}
 
+
+	private HorizontalGroup getLastGroup() {
+		return (HorizontalGroup)this.getChildren().get(this.getChildren().size-1);
+	}
+
+	
+	
 	public CombatObjectActor get(int row, int column) {
 		HorizontalGroup group = (HorizontalGroup)this.getChildren().get(row);
 		CombatObjectActor object = (CombatObjectActor) group.getChildren().get(column);
