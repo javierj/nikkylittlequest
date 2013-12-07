@@ -30,12 +30,17 @@ public class TestEnemyActor {
 	
 	@Test
 	public void whenUpdatingAnEnemyActor__TimeAlertIsUpdatedYet() {
-		SpyTimeAlert alert = new SpyTimeAlert(5);
-		enemy.setAttackTimeAlert(alert);
+		//SpyTimeAlert alert = new SpyTimeAlert(5);
+		TimeAlert alert = new TimeAlert(5);
+		TimeAlert spyalert = spy(alert);
+		
+		
+		enemy.setAttackTimeAlert(spyalert);
 		
 		enemy.act(1f);
 		
-		assertThat(alert.timeCalled, equalTo(1f));
+		//assertThat(alert.timeCalled, equalTo(1f));
+		verify(spyalert).act(1f);
 	}
 	
 	/**
@@ -91,21 +96,5 @@ public class TestEnemyActor {
 		assertThat(this.enemy.hp, is(this.hitPoints -2));
 	}
 
-	// --- Spies --------------------------------------------------
-	
-	class SpyTimeAlert extends TimeAlert {
-		public SpyTimeAlert(long l) {
-			super(l);
-			// TODO Auto-generated constructor stub
-		}
-
-		public float timeCalled = 0;
-
-		@Override
-		public void act(float delta) {
-			this.timeCalled = delta;
-		}
-		
-	};
 
 }

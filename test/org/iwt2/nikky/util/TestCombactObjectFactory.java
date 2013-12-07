@@ -3,7 +3,7 @@ package org.iwt2.nikky.util;
 import static org.junit.Assert.*;
 import static org.hamcrest.CoreMatchers.*;
 import java.util.List;
-
+import static org.mockito.Mockito.*;
 import org.iwt2.nikky.NikkyConstants;
 import org.iwt2.nikky.model.base.CombatObject;
 import org.iwt2.nikky.view.TextureDict;
@@ -15,11 +15,13 @@ import com.badlogic.gdx.graphics.Texture;
 public class TestCombactObjectFactory {
 
 	private CombactObjectFactory coFactory;
-	private FakeTextureDict fakeDict;
+	//private FakeTextureDict fakeDict;
+	private TextureDict fakeDict;
 
 	@Before
 	public void setUp() throws Exception {
-		fakeDict = new FakeTextureDict();
+		//fakeDict = new FakeTextureDict();
+		fakeDict = spy(new TextureDict());
 		coFactory = new CombactObjectFactory(fakeDict);
 	}
 
@@ -57,22 +59,7 @@ public class TestCombactObjectFactory {
 	public void whenCreatingCarrot_TextureCarrotIsSearchedInDict() {
 		List<CombatObject> objects = coFactory.createObjects();
 		
-		assertTrue(fakeDict.carrotSearched);
+		verify(fakeDict).getTexture("carrot");
 	}
 
-	//----------------
-	
-	class FakeTextureDict extends TextureDict {
-
-		public boolean carrotSearched = false;
-		
-		@Override
-		public Texture getTexture(String name) {
-			if (name.equals("carrot"))
-				this.carrotSearched = true;
-			return null;
-			
-		}
-		
-	}
 }

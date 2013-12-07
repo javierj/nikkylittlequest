@@ -10,6 +10,8 @@ import org.iwt2.nikky.util.TimeAlert;
 import org.junit.Before;
 import org.junit.Test;
 
+import com.badlogic.gdx.graphics.g2d.NinePatch;
+
 
 public class TestCombatProcess {
 
@@ -60,30 +62,19 @@ public class TestCombatProcess {
 	
 	@Test
 	public void whenPlayerSelectsAnObject_ThatEnemyReceivesTheObject() {
-		FakeEnemy fakeenemy = new FakeEnemy();
-		process.setEnemy(fakeenemy);
+		EnemyActor spyenemy = spy(new EnemyActor(unused(30)));
+		process.setEnemy(spyenemy);
 		
 		CombatObject co = mock(CombatObject.class);
 		
 		process.clickInObject(co);
 		
-		assertTrue(fakeenemy.called_hittedBy);
+		verify(spyenemy).hittedBy(co);
 	}
 
-	//------------------
-	
-	class FakeEnemy extends EnemyActor {
-		
-		boolean called_hittedBy;
-
-		public FakeEnemy() {
-			super(30);
-		}
-		
-		@Override
-		public void hittedBy(CombatObject co) {
-			this.called_hittedBy = true;
-		}
+	private int unused(int i) {
+		return i;
 	}
+
 	
 }
