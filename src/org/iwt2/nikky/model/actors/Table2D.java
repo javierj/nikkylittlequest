@@ -61,4 +61,28 @@ extends VerticalGroup
 			hGroup.setSpacing(space);
 		}
 	}
+
+	/**
+	 * Improve stestability
+	 * @return
+	 */
+	public Integer getRowCount() {
+		return this.getChildren().size;
+	}
+
+	/**
+	 * Improve stestability
+	 * @return
+	 */
+	public HorizontalGroup getGroupInRow(int i) {
+		return (HorizontalGroup)this.getChildren().get(i);
+	}
+	
+	/**
+	 * Improve stestability
+	 * @return
+	 */
+	public int columnLimit() {
+		return this.rowNumber;
+	}
 }

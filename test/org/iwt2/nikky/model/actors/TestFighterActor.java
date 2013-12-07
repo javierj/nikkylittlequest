@@ -8,8 +8,6 @@ import org.iwt2.nikky.model.actors.FighterActor;
 import org.junit.Before;
 import org.junit.Test;
 
-
-
 /**
  * A fighter Actor is a LibGDX Actor that has hit points
  * @author Javier
@@ -71,6 +69,16 @@ public class TestFighterActor {
 		fighter.hitted(this.hitPoints);
 		assertTrue(fighter.isDeath());
 		
+	}
+	
+	@Test
+	public void aNewFighterActorHasATable2DWithThreeColumns() {
+		assertThat(fighter.hpTable.columnLimit(),is(3));
+	}
+	
+	@Test
+	public void aNewFighterActorHasAsManyHeartsAsHP_InTable() {
+		fail("Not done yet");
 	}
 
 }

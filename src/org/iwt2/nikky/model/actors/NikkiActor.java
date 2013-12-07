@@ -1,5 +1,6 @@
 package org.iwt2.nikky.model.actors;
 
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
@@ -8,6 +9,10 @@ public class NikkiActor extends FighterActor {
 	
 	public NikkiActor(int hp) {
 		super(hp);
+	}
+
+	public NikkiActor(Texture texture, int hp) {
+		super (texture, hp);
 	}
 
 	@Override

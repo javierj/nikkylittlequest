@@ -6,16 +6,21 @@ import java.util.List;
 
 import org.iwt2.nikky.NikkyConstants;
 import org.iwt2.nikky.model.base.CombatObject;
+import org.iwt2.nikky.view.TextureDict;
 import org.junit.Before;
 import org.junit.Test;
+
+import com.badlogic.gdx.graphics.Texture;
 
 public class TestCombactObjectFactory {
 
 	private CombactObjectFactory coFactory;
+	private FakeTextureDict fakeDict;
 
 	@Before
 	public void setUp() throws Exception {
-		coFactory = new CombactObjectFactory();
+		fakeDict = new FakeTextureDict();
+		coFactory = new CombactObjectFactory(fakeDict);
 	}
 
 	@Test
@@ -47,5 +52,27 @@ public class TestCombactObjectFactory {
 		assertTrue(objects.get(2).isFood());
 		
 	}
+	
+	@Test
+	public void whenCreatingCarrot_TextureCarrotIsSearchedInDict() {
+		List<CombatObject> objects = coFactory.createObjects();
+		
+		assertTrue(fakeDict.carrotSearched);
+	}
 
+	//----------------
+	
+	class FakeTextureDict extends TextureDict {
+
+		public boolean carrotSearched = false;
+		
+		@Override
+		public Texture getTexture(String name) {
+			if (name.equals("carrot"))
+				this.carrotSearched = true;
+			return null;
+			
+		}
+		
+	}
 }

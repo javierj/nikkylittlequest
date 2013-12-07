@@ -7,16 +7,23 @@ import com.badlogic.gdx.scenes.scene2d.ui.Image;
 public class FighterActor extends Image {
 
 	 int hp;
+	 Table2D hpTable;
 
 	public FighterActor(int hp) {
-		this.hp = hp;
+		init(hp);
+		
 	}
 
 	public FighterActor(Texture text, int hp) {
 		super(text);
-		this.hp= hp;
+		
+		
 	}
 
+	private void init(int hp) {
+		this.hp= hp;
+		hpTable = new Table2D(3);
+	}
 	
 	public int getHP() {
 		return this.hp;

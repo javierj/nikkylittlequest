@@ -63,7 +63,9 @@ public class EnemyActor extends FighterActor {
 	public void hittedBy(CombatObject co) {
 		for(Weakness w: this.weakness) {
 			if (w.isWeakTo(co)) {
+				
 				this.hp--;
+				System.out.println("EnemyActor:hitted: " + this.hp + " / Test only. Remove in the future.");
 				return;
 			}
 		}

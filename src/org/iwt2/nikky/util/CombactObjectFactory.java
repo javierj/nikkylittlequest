@@ -6,6 +6,11 @@ import java.util.List;
 import org.iwt2.nikky.NikkyConstants;
 import org.iwt2.nikky.model.actors.CombatObjectActor;
 import org.iwt2.nikky.model.base.CombatObject;
+import org.iwt2.nikky.view.TextureDict;
+
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 
 /**
  * This class contains a hard-coded list of all thw combat objects created
@@ -16,6 +21,13 @@ import org.iwt2.nikky.model.base.CombatObject;
  */
 public class CombactObjectFactory {
 
+	private TextureDict dict;
+
+
+	public CombactObjectFactory(TextureDict dict) {
+		this.dict = dict;
+	}
+
 	public List<CombatObject> createObjects() {
 		
 		List<CombatObject> objects = new ArrayList<CombatObject>();
@@ -23,6 +35,7 @@ public class CombactObjectFactory {
 		objects.add(createCarrod());
 		objects.add(createApple());
 		objects.add(createBanana());
+		objects.add(createSalad());
 		
 		return objects;
 	}
@@ -34,6 +47,7 @@ public class CombactObjectFactory {
 		coa.setName("Carrot");
 		coa.setColor(NikkyConstants.COLORORANGE);
 		coa.setFood();
+		coa.setDrawable(createDrawable(dict.getTexture("carrot")) );
 		
 		return coa;
 	}
@@ -45,6 +59,7 @@ public class CombactObjectFactory {
 		coa.setName("Apple");
 		coa.setColor(NikkyConstants.COLORRED);
 		coa.setFood();
+		coa.setDrawable(createDrawable(dict.getTexture("apple")) );
 		
 		return coa;
 	}
@@ -56,7 +71,33 @@ public class CombactObjectFactory {
 		coa.setName("Banana");
 		coa.setColor(NikkyConstants.COLORYELLOW);
 		coa.setFood();
+		coa.setDrawable(createDrawable(dict.getTexture("banana")) );
 		
 		return coa;
+	}
+	
+	
+	private CombatObject createSalad() {
+		
+		CombatObjectActor coa =new CombatObjectActor();
+		
+		coa.setName("Salad");
+		coa.setColor(NikkyConstants.COLORGREEN);
+		coa.setFood();
+		coa.setDrawable(createDrawable(dict.getTexture("salad")) );
+		
+		return coa;
+	}
+	
+	
+	/**
+	 * Improves testability avoiding erro for null textures.
+	 * @param texture
+	 * @return
+	 */
+	private TextureRegionDrawable createDrawable(Texture texture) {
+		if (texture == null)
+			return null;
+		return new TextureRegionDrawable ( new TextureRegion(texture) );
 	}
 }

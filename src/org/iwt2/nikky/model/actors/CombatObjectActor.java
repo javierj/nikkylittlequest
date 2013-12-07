@@ -20,12 +20,12 @@ implements CombatObject
 	private boolean food = false;
 	
 	boolean inactive;
-	private ObjectObserver observer;
+	ObjectObserver observer;
 
 	
 	class Clicks extends ClickListener {
 		public void clicked (InputEvent event, float x, float y) {
-			System.out.println("CobatObjectActor::Click::clicked - Clicked on " + CombatObjectActor.this.getName());
+			//System.out.println("CobatObjectActor::Click::clicked - Clicked on " + CombatObjectActor.this.getName());
 			CombatObjectActor.this.click();
 		}
 	}

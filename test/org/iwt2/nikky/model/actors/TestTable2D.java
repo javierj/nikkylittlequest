@@ -89,7 +89,7 @@ public class TestTable2D {
 		table.add(objectB);
 		table.add(objectC);
 		
-		assertThat(table.getChildren().size, is(2));
+		assertThat(table.getRowCount(), is(2));
 		
 		HorizontalGroup groups = (HorizontalGroup)table.getChildren().get(1);
 		assertThat(groups.getChildren().size, is(1));
