@@ -47,7 +47,7 @@ public class TestTable2DFactory {
 		CombatObjectActor coa;
 		for (int i = 0; i < table.getRowCount(); i++) {
 			coa = table.get(i, 0);
-			assertEquals(coa.observer, observer);
+			assertEquals(coa.observers.get(0), observer);
 		}
 	
 	}

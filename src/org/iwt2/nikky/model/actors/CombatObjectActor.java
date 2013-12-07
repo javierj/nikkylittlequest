@@ -2,6 +2,9 @@ package org.iwt2.nikky.model.actors;
 
 
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.iwt2.nikky.model.base.CombatObject;
 import org.iwt2.nikky.model.process.ObjectObserver;
 
@@ -20,7 +23,7 @@ implements CombatObject
 	private boolean food = false;
 	
 	boolean inactive;
-	ObjectObserver observer;
+	List<ObjectObserver> observers;
 
 	
 	class Clicks extends ClickListener {
@@ -38,6 +41,7 @@ implements CombatObject
 	private void init() {
 		this.addListener(new Clicks());
 		inactive = false;
+		this.observers = new ArrayList<ObjectObserver>();
 	}
 	
 	public CombatObjectActor(Texture texture) {
@@ -78,20 +82,24 @@ implements CombatObject
 	
 	public void click() {
 		System.out.println("CobatObjectActor::click - Clicked on " + this.getName());
+		
 		if (this.inactive) {
 			return ;
 		}
 		this.addAction(Actions.fadeOut(1.0f));
 		this.inactive = true;
-		if (this.observer == null) {
-			System.err.println("CombarObjectActor::click() - observer is null,no notification of theclick");
-		} else {
-			this.observer.clickInObject(this);
-		}
+		
+		if (this.observers.isEmpty()) {
+			System.err.println("CombarObjectActor::click() - observers are empty,no notification of theclick");
+		} 
+			for(ObjectObserver o: this.observers) {
+				o.clickInObject(this);
+			}
+		
 	}
 
-	public void setObserver(ObjectObserver observer) {
-		this.observer = observer;
+	public void addObserver(ObjectObserver observer) {
+		this.observers.add(observer);
 		
 	}
 

@@ -99,5 +99,17 @@ public class TestTable2D {
 		
 	}
 	
+	@Test
+	public void addingTwoHeartsInsteadCombatObjects() {
+		HeartImage heart = new HeartImage();
+		
+		table.add(heart.clone());
+		table.add(heart.clone());
+		
+		assertThat(table.countElements(), is(2));
+	}
+
+
+	
 
 }

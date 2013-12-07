@@ -26,17 +26,25 @@ extends VerticalGroup
 	 * @param combatObjectActor
 	 */
 	public void add(CombatObjectActor combatObjectActor) {	
+		addInTable(combatObjectActor);
+	}
+	
+	public void add(HeartImage clone) {
+		addInTable(clone);
+	}
+
+
+	private void addInTable(Actor actor) {
 		HorizontalGroup group = getLastGroup();
 		if (group.getChildren().size >= this.rowNumber) {
 			group = new HorizontalGroup();
 			this.addActorAt(this.getChildren().size, group);
 		}
 		
-		group.addActor(combatObjectActor);
-		
+		group.addActor(actor);
+
 	}
-
-
+	
 	private HorizontalGroup getLastGroup() {
 		return (HorizontalGroup)this.getChildren().get(this.getChildren().size-1);
 	}
@@ -85,4 +93,23 @@ extends VerticalGroup
 	public int columnLimit() {
 		return this.rowNumber;
 	}
+
+	/**
+	 * Improve stestability
+	 * @return
+	 */
+	public Integer countElements() {
+		int count = 0;
+		HorizontalGroup group;
+		
+		for (int i = 0; i < this.getRowCount(); i++) {
+			group = this.getGroupInRow(i);
+			count += group.getChildren().size;
+		}
+		
+		return count;
+	}
+
+
+
 }

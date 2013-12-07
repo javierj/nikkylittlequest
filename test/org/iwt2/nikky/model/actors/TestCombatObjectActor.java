@@ -27,8 +27,6 @@ public class TestCombatObjectActor {
 
 	@Test
 	public void aNewCombatObjectItHasNoColor() {
-		
-		
 		assertFalse(bco.isColor(NikkyConstants.COLORBLUE));
 		assertFalse(bco.isColor(NikkyConstants.COLORYELLOW));
 	}
@@ -124,13 +122,31 @@ public class TestCombatObjectActor {
 	public void whenClick_TheObjectObservableIsNotiffied() {
 		
 		ObjectObserver observer = mock(ObjectObserver.class);
-		this.bcoActor.setObserver(observer);
+		this.bcoActor.addObserver(observer);
 		
 		ClickListener listener = (ClickListener) this.bcoActor.getListeners().get(0);
 		
 		listener.clicked(null, 0f, 0f);
 		
 		verify(observer).clickInObject(this.bco);
+	}
+
+	
+	@Test
+	public void givenTwoObservables_whenClick_allObservablesAreNotiffied() {
+		
+		ObjectObserver observer01 = mock(ObjectObserver.class);
+		ObjectObserver observer02 = mock(ObjectObserver.class);
+
+		this.bcoActor.addObserver(observer01);
+		this.bcoActor.addObserver(observer02);
+		
+		ClickListener listener = (ClickListener) this.bcoActor.getListeners().get(0);
+		
+		listener.clicked(null, 0f, 0f);
+		
+		verify(observer01).clickInObject(this.bco);
+		verify(observer02).clickInObject(this.bco);
 	}
 
 }

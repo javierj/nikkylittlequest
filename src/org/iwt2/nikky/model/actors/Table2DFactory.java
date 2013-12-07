@@ -30,17 +30,17 @@ public class Table2DFactory {
 		
 		object1 = (CombatObjectActor) objects.get(0);
 		
-		object1.setObserver(observer);
+		object1.addObserver(observer);
 
 		object2 = (CombatObjectActor) objects.get(1);
 		
-		object2.setObserver(observer);
+		object2.addObserver(observer);
 		
 		object3 = (CombatObjectActor) objects.get(2);
-		object3.setObserver(observer);
+		object3.addObserver(observer);
 
 		object4 = (CombatObjectActor) objects.get(3);
-		object4.setObserver(observer);
+		object4.addObserver(observer);
 
 		Table2D table = new Table2D(this.objectsInRow);
 		table.setSpacing(10f);

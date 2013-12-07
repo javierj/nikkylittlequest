@@ -78,7 +78,11 @@ public class TestFighterActor {
 	
 	@Test
 	public void aNewFighterActorHasAsManyHeartsAsHP_InTable() {
-		fail("Not done yet");
+		HeartImage heart = new HeartImage();
+		
+		fighter.setHPImage(heart);
+		
+		assertThat(fighter.hpTable.countElements(), is(hitPoints));
 	}
 
 }
