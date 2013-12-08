@@ -6,8 +6,11 @@ import static org.hamcrest.CoreMatchers.*;
 import static org.mockito.Mockito.*;
 import org.iwt2.nikky.model.actors.CombatObjectActor;
 import org.iwt2.nikky.model.actors.Table2D;
+import org.iwt2.nikky.model.actors.Table2DFactory;
 import org.junit.Before;
 import org.junit.Test;
+
+import testfactories.CombatObjectActorFactory;
 
 public class TestRefillTableProcess {
 
@@ -26,11 +29,9 @@ public class TestRefillTableProcess {
 		co.addObserver(spyRefillProcess);
 	}
 
+	
 	@Test
 	public void whenAnObjexctIsClicked_RefillProcessIsNotified() {
-		
-
-		
 		co.click();
 		
 		verify(spyRefillProcess ).clickInObject(co );
@@ -70,6 +71,19 @@ public class TestRefillTableProcess {
 		this.spyRefillProcess.refillTable();
 		
 		assertThat(table.countElements(), is(0));
+	}
+	
+	
+	@Test
+	public void whenTableIsRefilled_Table2DFactoryIsCalledWithThatTable() {
+		Table2DFactory spyFactory = spy(new Table2DFactory(0));
+		spyFactory.setCombatObjects(CombatObjectActorFactory.createEmptyList());
+		
+		this.spyRefillProcess.setTable2DFactory(spyFactory);
+		
+		this.spyRefillProcess.refillTable();
+		
+		verify(spyFactory).createTable2D(table);
 	}
 
 }

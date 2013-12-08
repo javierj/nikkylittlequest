@@ -1,10 +1,10 @@
 package testfactories;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 import org.iwt2.nikky.model.actors.CombatObjectActor;
-import org.iwt2.nikky.model.process.ObjectObserver;
 
 public class CombatObjectActorFactory {
 
@@ -16,5 +16,10 @@ public class CombatObjectActorFactory {
 		
 		return Arrays.asList(createCombatObjectActor(), createCombatObjectActor());
 	}
-	
+
+	public static List<CombatObjectActor> createEmptyList() {
+		
+		return new ArrayList<CombatObjectActor>();
+	}
+
 }

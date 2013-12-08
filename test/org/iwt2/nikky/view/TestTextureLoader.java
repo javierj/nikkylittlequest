@@ -48,7 +48,7 @@ public class TestTextureLoader {
 		
 		assertTrue(fakeDict.load_called);
 		assertEquals(fakeDict, textureDict);
-		assertThat(fakeDict.add_called, is(loader.characters.length + loader.objects.length));
+		assertThat(fakeDict.add_called, is(loader.characters.length + loader.objects.length + loader.backgrounds.length));
 	}
 
 	

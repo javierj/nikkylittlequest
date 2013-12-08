@@ -11,6 +11,7 @@ import org.iwt2.nikky.model.actors.Table2DFactory;
 import org.iwt2.nikky.model.base.CombatObject;
 import org.iwt2.nikky.model.base.WeaknessToFood;
 import org.iwt2.nikky.model.process.CombatProcess;
+import org.iwt2.nikky.model.process.RefillTableProcess;
 import org.iwt2.nikky.model.stages.CombatStage;
 import org.iwt2.nikky.util.CombactObjectFactory;
 import org.iwt2.nikky.util.ObserversLoader;
@@ -38,8 +39,8 @@ public class NikkyLittleQuestGame implements ApplicationListener {
 
 	
 	CombatProcess process;
-	//CombatStage combatStage;
-	Stage combatStage;
+	CombatStage combatStage;
+	//Stage combatStage;
 	private CombatObjectGroup coGroup;
 	private CombatObjectActor object;
 	
@@ -101,28 +102,23 @@ public class NikkyLittleQuestGame implements ApplicationListener {
 		
 		//-- Stage
 		
-		//combatStage = new CombatStage(nikky, new SpriteBatch());
-		combatStage = new Stage();
+		combatStage = new CombatStage(nikky, new SpriteBatch());
+		
+		/*combatStage = new Stage();
 		combatStage.addActor(nikky);
-		combatStage.addActor(enemy);
+		combatStage.addActor(enemy);*/
 		//this.combatStage.addActor(demo);
 		Gdx.input.setInputProcessor(this.combatStage);
 		
+		combatStage.addBackground(new Image(textures.getTexture("background")));
+		combatStage.addBackground(new Image(textures.getTexture("house03")));
 		
-		process = new CombatProcess(nikky, enemy);
+		
 		
 		// Group & objects
 		
 		CombactObjectFactory coFactory = new CombactObjectFactory(textures);
 		List<CombatObjectActor> combatObjects = coFactory.createObjects();
-		
-		// Observers
-		
-		ObserversLoader decorator = new ObserversLoader();
-		decorator.addObserver(process);
-		decorator.decorate(combatObjects );
-		
-
 		
 		
 		
@@ -174,9 +170,22 @@ public class NikkyLittleQuestGame implements ApplicationListener {
 		*/
 		
 		Table2DFactory factory = new Table2DFactory(2);
-		
-		Table2D table = factory.createTable2D(combatObjects, null);
+		factory.setCombatObjects(combatObjects);
+		Table2D table = factory.createTable2D();
 		table.setPosition(100f, 150f);
+
+		// Observers
+
+		process = new CombatProcess(nikky, enemy);
+
+		RefillTableProcess refill = new RefillTableProcess(table);
+		refill.setTable2DFactory(factory);
+		
+		ObserversLoader decorator = new ObserversLoader();
+		decorator.addObserver(process);
+		decorator.addObserver(refill);
+		
+		decorator.decorate(combatObjects );
 
 		this.combatStage.addActor(table);
 	}

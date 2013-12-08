@@ -8,6 +8,7 @@ import java.util.List;
 import org.iwt2.nikky.model.base.CombatObject;
 import org.iwt2.nikky.model.process.ObjectObserver;
 
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
@@ -109,6 +110,17 @@ implements CombatObject
 	 */
 	public List<ObjectObserver> getObserver() {
 		return this.observers;
+		
+	}
+
+	/**
+	 * Set the sate of the object as before receiving a click.
+	 */
+	public void reset() {
+		this.inactive = false;
+		Color c = this.getColor();
+		c.a = 1.0f;
+		this.setColor(c);
 		
 	}
 }

@@ -148,5 +148,18 @@ public class TestCombatObjectActor {
 		verify(observer01).clickInObject(this.bco);
 		verify(observer02).clickInObject(this.bco);
 	}
+	
+	@Test
+	public void whenReset_ObjectIsReady() {
+		
+		bcoActor.click();
+		bcoActor.act(10f);
+		
+		bcoActor.reset();
+		
+		assertFalse(bcoActor.inactive);
+		assertEquals(bcoActor.getColor().a, 1.0f, 0.1f);
+
+	}
 
 }

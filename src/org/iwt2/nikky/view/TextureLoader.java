@@ -18,6 +18,11 @@ public class TextureLoader {
 			{"salad", "objects/salad.jpg"}
 	};
 
+	String[][] backgrounds = {
+			{"background", "backgrounds/background.jpg"},
+			{"house03", "backgrounds/house03.jpg"}
+	};
+	
 	TextureDict dict;
 
 	private List<String> objectNames;
@@ -48,6 +53,13 @@ public class TextureLoader {
 		
 	}
 
+	void loadBackgrounds() {
+		for(String[] dupla: this.backgrounds) {
+			this.dict.addTexture(dupla[0], dupla[1]);
+		}
+		
+	}
+
 	
 	/**
 	 * 
@@ -56,6 +68,7 @@ public class TextureLoader {
 	public TextureDict getTextureDictionary() {
 		loadCharacters();
 		this.loadObjects();
+		this.loadBackgrounds();
 		dict.load();
 		return dict;
 	}

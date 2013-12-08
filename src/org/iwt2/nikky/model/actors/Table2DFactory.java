@@ -11,46 +11,66 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 
+/**
+ * This factory is still a fake.
+ * 
+ * @author Javier
+ *
+ */
 public class Table2DFactory {
 
 	private int objectsInRow;
+	private List<CombatObjectActor> objects;
 
 	public Table2DFactory(int objectsInRow) {
 		this.objectsInRow = objectsInRow;
 	}
 
-	public Table2D createTable2D(List<CombatObjectActor> objects, ObjectObserver observer) {
-		
-		CombatObjectActor object1; // =new CombatObjectActor(textures.getTexture("apple"));
-		CombatObjectActor object2; // =new CombatObjectActor(textures.getTexture("carrot"));
-		CombatObjectActor object3 ; //=new CombatObjectActor(textures.getTexture("banana"));
-		CombatObjectActor object4; // =new CombatObjectActor(textures.getTexture("salad"));
-		
-		
-		
-		object1 = (CombatObjectActor) objects.get(0);
-		
-		//object1.addObserver(observer);
+	/**
+	 * Will be private.
+	 * 
+	 * @param objects
+	 * @param table
+	 * @return
+	 */
+	public Table2D createTable2D(List<CombatObjectActor> objects,
+			Table2D table) 
+	{
 
-		object2 = (CombatObjectActor) objects.get(1);
+		table.clearObjects();
+		for (CombatObjectActor object: objects) {
+			object.reset();
+			table.add(object);
+		}
 		
-		//object2.addObserver(observer);
 		
-		object3 = (CombatObjectActor) objects.get(2);
-		//object3.addObserver(observer);
+		return table;
+	}
 
-		object4 = (CombatObjectActor) objects.get(3);
-		//object4.addObserver(observer);
-
+	
+	public Table2D  createTable2D() {
+		if (this.objects == null) {
+			System.out.println("Table2DFactory::createTable2D() - No object list. Call setObjects first");
+		}
+		
 		Table2D table = new Table2D(this.objectsInRow);
 		table.setSpacing(10f);
 		
-		table.add(object1);
-		table.add(object2);
-		table.add(object3);
-		table.add(object4);
+		return this.createTable2D(objects, table);
+	}
+
+	public void setCombatObjects(
+			List<CombatObjectActor> objects) 
+	{
+		this.objects = objects;
 		
-		return table;
+	}
+
+	public Table2D createTable2D(Table2D table) {
+		if (this.objects == null) {
+			System.out.println("Table2DFactory::createTable2D() - No object list. Call setObjects first");
+		}
+		return this.createTable2D(this.objects, table);
 	}
 
 
