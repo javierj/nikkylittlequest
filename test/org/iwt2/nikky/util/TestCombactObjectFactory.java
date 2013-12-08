@@ -5,6 +5,7 @@ import static org.hamcrest.CoreMatchers.*;
 import java.util.List;
 import static org.mockito.Mockito.*;
 import org.iwt2.nikky.NikkyConstants;
+import org.iwt2.nikky.model.actors.CombatObjectActor;
 import org.iwt2.nikky.model.base.CombatObject;
 import org.iwt2.nikky.view.TextureDict;
 import org.junit.Before;
@@ -15,20 +16,18 @@ import com.badlogic.gdx.graphics.Texture;
 public class TestCombactObjectFactory {
 
 	private CombactObjectFactory coFactory;
-	//private FakeTextureDict fakeDict;
 	private TextureDict fakeDict;
+	List<CombatObjectActor> objects;
 
 	@Before
 	public void setUp() throws Exception {
-		//fakeDict = new FakeTextureDict();
 		fakeDict = spy(new TextureDict());
 		coFactory = new CombactObjectFactory(fakeDict);
+		objects = coFactory.createObjects();
 	}
 
 	@Test
 	public void firstObjectIs_Carrot() {
-		List<CombatObject> objects = coFactory.createObjects();
-		
 		assertThat(objects.get(0).getName(), is("Carrot"));
 		assertTrue(objects.get(0).isColor(NikkyConstants.COLORORANGE ));
 		assertTrue(objects.get(0).isFood());
@@ -37,8 +36,6 @@ public class TestCombactObjectFactory {
 
 	@Test
 	public void secondObjectIs_Apple() {
-		List<CombatObject> objects = coFactory.createObjects();
-		
 		assertThat(objects.get(1).getName(), is("Apple"));
 		assertTrue(objects.get(1).isColor(NikkyConstants.COLORRED));
 		assertTrue(objects.get(1).isFood());
@@ -47,8 +44,6 @@ public class TestCombactObjectFactory {
 
 	@Test
 	public void thirdObjectIs_Banana() {
-		List<CombatObject> objects = coFactory.createObjects();
-		
 		assertThat(objects.get(2).getName(), is("Banana"));
 		assertTrue(objects.get(2).isColor(NikkyConstants.COLORYELLOW));
 		assertTrue(objects.get(2).isFood());
@@ -57,8 +52,6 @@ public class TestCombactObjectFactory {
 	
 	@Test
 	public void whenCreatingCarrot_TextureCarrotIsSearchedInDict() {
-		List<CombatObject> objects = coFactory.createObjects();
-		
 		verify(fakeDict).getTexture("carrot");
 	}
 

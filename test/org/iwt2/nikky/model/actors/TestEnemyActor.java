@@ -30,23 +30,14 @@ public class TestEnemyActor {
 	
 	@Test
 	public void whenUpdatingAnEnemyActor__TimeAlertIsUpdatedYet() {
-		//SpyTimeAlert alert = new SpyTimeAlert(5);
-		TimeAlert alert = new TimeAlert(5);
-		TimeAlert spyalert = spy(alert);
-		
-		
+		TimeAlert spyalert = spy(new TimeAlert(5));
 		enemy.setAttackTimeAlert(spyalert);
 		
 		enemy.act(1f);
 		
-		//assertThat(alert.timeCalled, equalTo(1f));
 		verify(spyalert).act(1f);
 	}
 	
-	/**
-	 * Warning !!
-	 * This test must not know how to create blue objects.
-	 */
 	@Test
 	public void whenAEnemyActorHasWeaknessForBlueObjects_AndGetsABlueObject_LosesOneHP() {
 		

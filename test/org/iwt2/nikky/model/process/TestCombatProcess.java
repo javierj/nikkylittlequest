@@ -3,14 +3,11 @@ import static org.junit.Assert.*;
 import static org.hamcrest.CoreMatchers.*;
 import static org.mockito.Mockito.*;
 import org.iwt2.nikky.model.actors.EnemyActor;
-import org.iwt2.nikky.model.actors.FighterActor;
 import org.iwt2.nikky.model.actors.NikkiActor;
 import org.iwt2.nikky.model.base.CombatObject;
 import org.iwt2.nikky.util.TimeAlert;
 import org.junit.Before;
 import org.junit.Test;
-
-import com.badlogic.gdx.graphics.g2d.NinePatch;
 
 
 public class TestCombatProcess {

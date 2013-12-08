@@ -19,7 +19,7 @@ public class Table2DFactory {
 		this.objectsInRow = objectsInRow;
 	}
 
-	public Table2D createTable2D(List<CombatObject> objects, ObjectObserver observer) {
+	public Table2D createTable2D(List<CombatObjectActor> objects, ObjectObserver observer) {
 		
 		CombatObjectActor object1; // =new CombatObjectActor(textures.getTexture("apple"));
 		CombatObjectActor object2; // =new CombatObjectActor(textures.getTexture("carrot"));
@@ -30,17 +30,17 @@ public class Table2DFactory {
 		
 		object1 = (CombatObjectActor) objects.get(0);
 		
-		object1.addObserver(observer);
+		//object1.addObserver(observer);
 
 		object2 = (CombatObjectActor) objects.get(1);
 		
-		object2.addObserver(observer);
+		//object2.addObserver(observer);
 		
 		object3 = (CombatObjectActor) objects.get(2);
-		object3.addObserver(observer);
+		//object3.addObserver(observer);
 
 		object4 = (CombatObjectActor) objects.get(3);
-		object4.addObserver(observer);
+		//object4.addObserver(observer);
 
 		Table2D table = new Table2D(this.objectsInRow);
 		table.setSpacing(10f);

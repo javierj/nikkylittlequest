@@ -110,6 +110,24 @@ public class TestTable2D {
 	}
 
 
-	
+	@Test
+	public void afterClearObjects_NoMoreElementsInTable() {
+		table.add(objectA);
+		assertThat(table.countElements(), is(1));
+		
+		table.clearObjects();
+		
+		assertThat(table.countElements(), is(0));
+	}
+
+	@Test
+	public void afterClearObjects_NoHorizontalGroupsAreDeleted() {
+		table.add(objectA);
+		assertThat(table.getChildren().size, is(1));
+		
+		table.clearObjects();
+		
+		assertThat(table.getChildren().size, is(1));
+	}
 
 }

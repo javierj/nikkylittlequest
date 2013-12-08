@@ -28,9 +28,9 @@ public class CombactObjectFactory {
 		this.dict = dict;
 	}
 
-	public List<CombatObject> createObjects() {
+	public List<CombatObjectActor> createObjects() {
 		
-		List<CombatObject> objects = new ArrayList<CombatObject>();
+		List<CombatObjectActor> objects = new ArrayList<CombatObjectActor>();
 		
 		objects.add(createCarrod());
 		objects.add(createApple());
@@ -40,7 +40,7 @@ public class CombactObjectFactory {
 		return objects;
 	}
 
-	private CombatObject createCarrod() {
+	private CombatObjectActor createCarrod() {
 		
 		CombatObjectActor coa =new CombatObjectActor();
 		
@@ -52,7 +52,7 @@ public class CombactObjectFactory {
 		return coa;
 	}
 
-	private CombatObject createApple() {
+	private CombatObjectActor createApple() {
 		
 		CombatObjectActor coa =new CombatObjectActor();
 		
@@ -64,7 +64,7 @@ public class CombactObjectFactory {
 		return coa;
 	}
 	
-	private CombatObject createBanana() {
+	private CombatObjectActor createBanana() {
 		
 		CombatObjectActor coa =new CombatObjectActor();
 		
@@ -77,7 +77,7 @@ public class CombactObjectFactory {
 	}
 	
 	
-	private CombatObject createSalad() {
+	private CombatObjectActor createSalad() {
 		
 		CombatObjectActor coa =new CombatObjectActor();
 		

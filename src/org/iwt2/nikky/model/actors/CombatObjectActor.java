@@ -103,6 +103,12 @@ implements CombatObject
 		
 	}
 
-
-
+	/**
+	 * For testingonly
+	 * @return 
+	 */
+	public List<ObjectObserver> getObserver() {
+		return this.observers;
+		
+	}
 }

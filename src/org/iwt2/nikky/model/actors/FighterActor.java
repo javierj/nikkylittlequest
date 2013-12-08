@@ -17,7 +17,7 @@ public class FighterActor extends Image {
 
 	public FighterActor(Texture text, int hp) {
 		super(text);
-		
+		init(hp);
 		
 	}
 

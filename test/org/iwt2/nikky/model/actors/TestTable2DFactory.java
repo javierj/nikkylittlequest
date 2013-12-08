@@ -41,6 +41,7 @@ public class TestTable2DFactory {
 		assertThat(group.getChildren().size,is(this.objectsInRow));		
 	}
 
+	/* - Settingobservrs has been extranted to another class.
 	@Test
 	public void whenCreatingANewTable2D_AllObjectsHaveTheObserver() {
 
@@ -51,6 +52,6 @@ public class TestTable2DFactory {
 		}
 	
 	}
-
+	*/
 
 }

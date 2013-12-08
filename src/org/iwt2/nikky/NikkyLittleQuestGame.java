@@ -13,6 +13,7 @@ import org.iwt2.nikky.model.base.WeaknessToFood;
 import org.iwt2.nikky.model.process.CombatProcess;
 import org.iwt2.nikky.model.stages.CombatStage;
 import org.iwt2.nikky.util.CombactObjectFactory;
+import org.iwt2.nikky.util.ObserversLoader;
 import org.iwt2.nikky.util.TimeAlert;
 import org.iwt2.nikky.view.TextureDict;
 import org.iwt2.nikky.view.TextureLoader;
@@ -84,7 +85,7 @@ public class NikkyLittleQuestGame implements ApplicationListener {
 		
 		EnemyActor enemy = new EnemyActor(textures.getTexture("enemy01"), 20);
 		//TimeAlert alert = ;
-		enemy.setAttackTimeAlert(new TimeAlert(2.0f ));
+		enemy.setAttackTimeAlert(new TimeAlert(8.0f ));
 		//enemy.setDrawable(new TextureRegionDrawable(new TextureRegion(textures.getTexture("enemy01"))));
 		enemy.setPosition(200f, floorY);
 		enemy.addWeakness(new WeaknessToFood());
@@ -113,6 +114,17 @@ public class NikkyLittleQuestGame implements ApplicationListener {
 		// Group & objects
 		
 		CombactObjectFactory coFactory = new CombactObjectFactory(textures);
+		List<CombatObjectActor> combatObjects = coFactory.createObjects();
+		
+		// Observers
+		
+		ObserversLoader decorator = new ObserversLoader();
+		decorator.addObserver(process);
+		decorator.decorate(combatObjects );
+		
+
+		
+		
 		
 		/*
 		CombatObjectActor object1; // =new CombatObjectActor(textures.getTexture("apple"));
@@ -163,7 +175,7 @@ public class NikkyLittleQuestGame implements ApplicationListener {
 		
 		Table2DFactory factory = new Table2DFactory(2);
 		
-		Table2D table = factory.createTable2D(coFactory.createObjects(), this.process);
+		Table2D table = factory.createTable2D(combatObjects, null);
 		table.setPosition(100f, 150f);
 
 		this.combatStage.addActor(table);

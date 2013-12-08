@@ -58,7 +58,11 @@ extends VerticalGroup
 	}
 
 	/**
-	 * Untestedmethd.No way to access tospacing information.
+	 * When changing the spacing of the table, the space of the verticalgroup
+	 * and horizontalgroups changestoo.
+	 * 
+	 * Untested method. 
+	 * No way to access to the spacing information.
 	 */
 	@Override
 	public void setSpacing(float space) {
@@ -95,8 +99,7 @@ extends VerticalGroup
 	}
 
 	/**
-	 * Improve stestability
-	 * @return
+	 * @return number of actors in the table.
 	 */
 	public Integer countElements() {
 		int count = 0;
@@ -108,6 +111,20 @@ extends VerticalGroup
 		}
 		
 		return count;
+	}
+
+
+	/**
+	 * Removes all combat objects in table, but doe snot remove
+	 * the horizontal groups in the vertical groups.
+	 */
+	public void clearObjects() {
+		HorizontalGroup group;
+		for(int i = 0; i < this.getChildren().size; i++) {
+			group = this.getGroupInRow(i);
+			group.clearChildren();
+		}
+		
 	}
 
 
